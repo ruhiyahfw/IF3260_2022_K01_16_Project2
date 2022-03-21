@@ -145,24 +145,24 @@ function initBuffers(gl) {
  
     // TODO: see all the modes
  
-   /* for translate
+   /*for translate
    translate(modelViewMatrix,     // destination matrix
                   modelViewMatrix,     // matrix to translate
                   [-0.0, 0.0, -6.0]);  // amount to translate */
    // for rotate z
    rotate(modelViewMatrix,  // destination matrix
                modelViewMatrix,  // matrix to rotate
-               cubeRotation,     // amount to rotate in radians
+               rotationZ.innerHTML,     // amount to rotate in radians
                [0, 0, 1]);       // axis to rotate around (Z)
-   // for rotate x 
+   //for rotate x 
    rotate(modelViewMatrix,  // destination matrix
                modelViewMatrix,  // matrix to rotate
-               cubeRotation * .7,// amount to rotate in radians
-               [0, 1, 0]);       // axis to rotate around (X)
-   // for rotate y (?)
-   /*mat4.rotate(modelViewMatrix,  // destination matrix
+               rotationX.innerHTML * .7,// amount to rotate in radians
+               [0, 1, 0]);       // axis to rotate around (X)*/
+   //for rotate y (?)
+   rotate(modelViewMatrix,  // destination matrix
                modelViewMatrix,  // matrix to rotate
-               cubeRotation * .7,// amount to rotate in radians
+               rotationY.innerHTML,// amount to rotate in radians
                [1, 0, 0]);       // axis to rotate around (Y)*/
  
  

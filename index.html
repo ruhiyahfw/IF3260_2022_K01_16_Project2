@@ -4,10 +4,38 @@
     <meta charset="utf-8">
     <script src="helper.js" defer></script>
     <script src="draw.js" defer></script>
+    <script src="event-listener.js" defer></script>
     <script src="main.js" defer></script>
   </head>
 
   <body>
     <canvas id="glcanvas" width="640" height="480"></canvas>
-  </body>
+    <label for="rotation">Angle X: <span id="rotationX-value">0</span></label>
+    <input
+      type="range"
+      id="rotationX"
+      name="rotationX"
+      min="-1"
+      max="1"
+      step="0.1"
+    />  
+    <label for="rotation">Angle Y: <span id="rotationY-value">0</span></label>
+    <input
+      type="range"
+      id="rotationY"
+      name="rotationY"
+      min="-1"
+      max="1"
+      step="0.1"
+    /> 
+    <label for="rotation">Angle Z: <span id="rotationZ-value">0</span></label>
+    <input
+      type="range"
+      id="rotationZ"
+      name="rotationZ"
+      min="-1"
+      max="1"
+      step="0.1"
+    />
+    </body>
 </html>

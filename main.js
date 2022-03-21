@@ -1,6 +1,3 @@
-// later use from html element
-var cubeRotation = 0;
-
 main();
 function main() {
   const canvas = document.querySelector('#glcanvas');
