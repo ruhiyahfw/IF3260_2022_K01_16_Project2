@@ -1,13 +1,16 @@
 main();
 function main() {
-  const canvas = document.querySelector('#glcanvas');
-  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
- // gl not supported
+  const canvas = document.querySelector("#glcanvas");
+  const gl =
+    canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+  // gl not supported
   if (!gl) {
-    alert('Unable to initialize WebGL. Your browser or machine may not support it.');
+    alert(
+      "Unable to initialize WebGL. Your browser or machine may not support it."
+    );
     return;
   }
- // vertex shader
+  // vertex shader
   const vsSource = `
     attribute vec4 aVertexPosition;
     attribute vec4 aVertexColor;
@@ -34,17 +37,20 @@ function main() {
   const programInfo = {
     program: shaderProgram,
     attribLocations: {
-      vertexPosition: gl.getAttribLocation(shaderProgram, 'aVertexPosition'),
-      vertexColor: gl.getAttribLocation(shaderProgram, 'aVertexColor'),
+      vertexPosition: gl.getAttribLocation(shaderProgram, "aVertexPosition"),
+      vertexColor: gl.getAttribLocation(shaderProgram, "aVertexColor"),
     },
     uniformLocations: {
-      projectionMatrix: gl.getUniformLocation(shaderProgram, 'uProjectionMatrix'),
-      modelViewMatrix: gl.getUniformLocation(shaderProgram, 'uModelViewMatrix'),
-    }
+      projectionMatrix: gl.getUniformLocation(
+        shaderProgram,
+        "uProjectionMatrix"
+      ),
+      modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
+    },
   };
 
   // buffers
-  const buffers = initBuffers(gl);
+  const buffers = initBuffersPyramid(gl);
 
   // draw the scene
   function render(now) {
