@@ -4,6 +4,8 @@ var rotationYRange = document.getElementById("rotationY");
 var rotationY = document.getElementById("rotationY-value");
 var rotationZRange = document.getElementById("rotationZ");
 var rotationZ = document.getElementById("rotationZ-value");
+var cameraRange = document.getElementById("camera");
+var camera = document.getElementById("camera-value");
 
 rotationXRange.addEventListener("change", () => {
     rotationX.innerHTML = rotationXRange.value;
@@ -15,4 +17,8 @@ rotationYRange.addEventListener("change", () => {
 
 rotationZRange.addEventListener("change", () => {
     rotationZ.innerHTML = rotationZRange.value;
+});
+
+cameraRange.addEventListener("change", () => {
+    camera.innerHTML = cameraRange.value;
 });
