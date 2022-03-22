@@ -16,22 +16,22 @@ var scaleY = document.getElementById("scalingY-value");
 var scaleZRange = document.getElementById("scalingZ");
 var scaleZ = document.getElementById("scalingZ-value");
 
-rotationXRange.addEventListener("change", () => {
+rotationXRange.addEventListener("input", () => {
     rotationX.innerHTML = rotationXRange.value;
     arrTransformation[mode]["rotations"][object][0] = rotationXRange.value;
 });
 
-rotationYRange.addEventListener("change", () => {
+rotationYRange.addEventListener("input", () => {
     rotationY.innerHTML = rotationYRange.value;
     arrTransformation[mode]["rotations"][object][1] = rotationYRange.value;
 });
 
-rotationZRange.addEventListener("change", () => {
+rotationZRange.addEventListener("input", () => {
     rotationZ.innerHTML = rotationZRange.value;
     arrTransformation[mode]["rotations"][object][2] = rotationZRange.value;
 });
 
-cameraRange.addEventListener("change", () => {
+cameraRange.addEventListener("input", () => {
     camera.innerHTML = cameraRange.value;
 });
 

@@ -1,6 +1,6 @@
 /*** DRAW SCENE ***/
 function drawScene(gl, programInfo, buffers) {
-  gl.clearColor(0.0, 0.0, 0.0, 1.0); // clear to back fully opaque
+  gl.clearColor(0.95, 0.95, 0.95, 1.0); // clear to back fully opaque
   gl.clearDepth(1.0); // clear everything
   gl.enable(gl.DEPTH_TEST); // depth test
   gl.depthFunc(gl.LEQUAL); // near things obscure far things
@@ -25,13 +25,9 @@ function drawScene(gl, programInfo, buffers) {
     
   }
 
-  
-
-
   /*** SETTING UP THE CAMERA ***/
   // set the drawing point to the center
   var modelViewMatrix = create();
-
 
   translateCamera(
     modelViewMatrix, // destination matrix
@@ -55,24 +51,13 @@ function drawScene(gl, programInfo, buffers) {
   /*** OBJECT TRANSFORMATION ***/
   // Scaling
   modelViewMatrix = scale(modelViewMatrix, arrTransformation[mode]["scales"][buffers.type][0], arrTransformation[mode]["scales"][buffers.type][1], arrTransformation[mode]["scales"][buffers.type][2], buffers.center);
-  modelViewMatrix = rotateX(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][0], buffers.center);
-  modelViewMatrix = rotateY(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][1], buffers.center);
-  modelViewMatrix = rotateZ(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][2], buffers.center);
+  
   // translasi
 
   // rotation
-  if (buffers.type == object){
-    if (mode == "orto"){
-      // modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
-      // modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
-      // modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
-    }
-    if (mode == "persp") {
-      // modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
-      // modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
-      // modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
-    }
-  }
+  modelViewMatrix = rotateX(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][0], buffers.center);
+  modelViewMatrix = rotateY(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][1], buffers.center);
+  modelViewMatrix = rotateZ(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][2], buffers.center);
 
   // ZOOM
   scaleCamera(modelViewMatrix,     // destination matrix
@@ -139,7 +124,7 @@ function drawScene(gl, programInfo, buffers) {
   );
 
   {
-    const vertexCount = 96;
+    const vertexCount = buffers.numVertices;
     const type = gl.UNSIGNED_SHORT;
     const offset = 0;
     gl.drawElements(gl.TRIANGLES, vertexCount, type, offset);
