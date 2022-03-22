@@ -2,6 +2,11 @@ var mode = "orto";
 var object = "cube"
 var arrTransformation = {
   "orto" : {
+    "rotations": {
+      "cube": [0, 0, 0],
+      "pyramid": [0, 0, 0],
+      "obj3": [0, 0, 0],
+    },
     "scales": {
       "cube": [1.0, 1.0, 1.0],
       "pyramid": [1.0, 1.0, 1.0],
@@ -308,16 +313,29 @@ function zRotation(angleInRadians) {
   ];
 }
 
-var xRotate = function(m, rx){
-  return multiply(m, xRotation(rx));
+var rotateX = function(m, rx, center){
+  var out = m;
+    out = multiply(m, translationMatrix(center[0], center[1], center[2]));
+    out = multiply(out, xRotation(rx));
+    out = multiply(out, translationMatrix(-center[0], -center[1], -center[2]));
+
+    return out;
 }
 
-var yRotate = function(m, rx){
-  return multiply(m, yRotation(rx));
+var rotateY = function(m, ry, center){
+  var out = m;
+    out = multiply(m, translationMatrix(center[0], center[1], center[2]));
+    out = multiply(out, yRotation(ry));
+    out = multiply(out, translationMatrix(-center[0], -center[1], -center[2]));
+    return out;
 }
 
-var zRotate = function(m, rx){
-  return multiply(m, zRotation(rx));
+var rotateZ = function(m, rz, center){
+  var out = m;
+  out = multiply(m, translationMatrix(center[0], center[1], center[2]));
+  out = multiply(out, zRotation(rz));
+  out = multiply(out, translationMatrix(-center[0], -center[1], -center[2]));
+    return out;
 }
 
 /* CAMERA */
@@ -344,34 +362,4 @@ function scaleCamera(out, a, v) {
   out[14] = a[14];
   out[15] = a[15];
   return out;
-}
-
-function getCenterPoint(start, end, arr){
-  let maxX = -1;
-  let minX = 1;
-  let maxY = -1;
-  let minY = 1;
-
-  for (var i = start; i < end; i+=3){
-      if(maxX < arr[i]){
-          maxX = arr[i];
-      }
-
-      if(minX > arr[i]){
-          minX = arr[i];
-      }
-
-      if(maxY < arr[i+1]){
-          maxY = arr[i+1];
-      }
-
-      if(minY > arr[i+1]){
-          minY = arr[i+1];
-      }
-  }
-
-  let centerX = (maxX + minX)/2;
-  let centerY = (maxY + minY)/2;
-  console.log(centerX, centerY)
-  return ([centerX, centerY])
 }

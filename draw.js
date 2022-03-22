@@ -55,49 +55,30 @@ function drawScene(gl, programInfo, buffers) {
   /*** OBJECT TRANSFORMATION ***/
   // Scaling
   modelViewMatrix = scale(modelViewMatrix, arrTransformation[mode]["scales"][buffers.type][0], arrTransformation[mode]["scales"][buffers.type][1], arrTransformation[mode]["scales"][buffers.type][2], buffers.center);
-
+  modelViewMatrix = rotateX(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][0], buffers.center);
+  modelViewMatrix = rotateY(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][1], buffers.center);
+  modelViewMatrix = rotateZ(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][2], buffers.center);
   // translasi
-
 
   // rotation
   if (buffers.type == object){
     if (mode == "orto"){
-      modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
-      modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
-      modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
+      // modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
+      // modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
+      // modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
     }
-    if (mode == "persp")
-      modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
-      modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
-      modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
+    if (mode == "persp") {
+      // modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
+      // modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
+      // modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
+    }
   }
 
   // ZOOM
   scaleCamera(modelViewMatrix,     // destination matrix
   modelViewMatrix,     // matrix to scale
   [camera.innerHTML, camera.innerHTML, camera.innerHTML]);  // amount to zoom */
-    
-  // // for rotate z
-  // rotateCamera(
-  //   modelViewMatrix, // destination matrix
-  //   modelViewMatrix, // matrix to rotate
-  //   rotationZ.innerHTML, // amount to rotate in radians
-  //   [0, 0, 1]
-  // ); // axis to rotate around (Z)
-  // //for rotate x
-  // rotateCamera(
-  //   modelViewMatrix, // destination matrix
-  //   modelViewMatrix, // matrix to rotate
-  //   rotationX.innerHTML * 0.7, // amount to rotate in radians
-  //   [0, 1, 0]
-  // ); // axis to rotate around (X)*/
-  // //for rotate y (?)
-  // rotateCamera(
-  //   modelViewMatrix, // destination matrix
-  //   modelViewMatrix, // matrix to rotate
-  //   rotationY.innerHTML, // amount to rotate in radians
-  //   [1, 0, 0]
-  // ); // axis to rotate around (Y)*/
+
 
   // pull out the positions from the position buffer into the vertexPosition attribute
   {
@@ -156,26 +137,6 @@ function drawScene(gl, programInfo, buffers) {
     false,
     modelViewMatrix
   );
-
-  /*function draw(proj_matrix, model_matrix, start, end){
-        gl.uniformMatrix4fv(_Pmatrix, false, proj_matrix);
-        gl.uniformMatrix4fv(_Vmatrix, false, view_matrix);
-        gl.uniformMatrix4fv(_Mmatrix, false, model_matrix);
-     
-        console.log(isShading);
-        
-        if(isShading){
-           shading(model_matrix, view_matrix);
-        }
-        else{
-           let normalMatrix = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0];
-           gl.uniformMatrix4fv(_Nmatrix, false, normalMatrix);
-        }
-     
-        for (var i = start; i < end; i++){
-           gl.drawArrays(gl.TRIANGLE_FAN, i*4, 4);
-        }
-     } */
 
   {
     const vertexCount = 96;

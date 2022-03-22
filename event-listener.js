@@ -18,14 +18,17 @@ var scaleZ = document.getElementById("scalingZ-value");
 
 rotationXRange.addEventListener("change", () => {
     rotationX.innerHTML = rotationXRange.value;
+    arrTransformation[mode]["rotations"][object][0] = rotationXRange.value;
 });
 
 rotationYRange.addEventListener("change", () => {
     rotationY.innerHTML = rotationYRange.value;
+    arrTransformation[mode]["rotations"][object][1] = rotationYRange.value;
 });
 
 rotationZRange.addEventListener("change", () => {
     rotationZ.innerHTML = rotationZRange.value;
+    arrTransformation[mode]["rotations"][object][2] = rotationZRange.value;
 });
 
 cameraRange.addEventListener("change", () => {
