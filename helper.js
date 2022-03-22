@@ -5,29 +5,29 @@ var arrTransformation = {
     "rotations": {
       "cube": [0, 0, 0],
       "pyramid": [0, 0, 0],
-      "obj3": [0, 0, 0],
+      "triangularprism": [0, 0, 0],
     },
     "scales": {
       "cube": [1.0, 1.0, 1.0],
       "pyramid": [1.0, 1.0, 1.0],
-      "obj3": [1.0, 1.0, 1.0],
+      "triangularprism": [1.0, 1.0, 1.0],
     }
   },
   "persp" : {
     "translations": {
       "cube": [-3.0, 0.0, 0.0],
       "pyramid": [0.0, 0.0, 0.0],
-      "obj3": [3.0, 0.0, 0.0],
+      "triangularprism": [3.0, 0.0, 0.0],
     },
     "rotations": {
       "cube": [0, 0, 0],
       "pyramid": [0, 0, 0],
-      "obj3": [0, 0, 0],
+      "triangularprism": [0, 0, 0],
     },
     "scales": {
       "cube": [1.0, 1.0, 1.0],
       "pyramid": [1.0, 1.0, 1.0],
-      "obj3": [1.0, 1.0, 1.0],
+      "triangularprism": [1.0, 1.0, 1.0],
     }
   }
 }
