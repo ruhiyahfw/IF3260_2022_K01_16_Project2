@@ -24,6 +24,28 @@
       </div>
       <div class="menu">
         <div class="menuitem">
+          <h4>Objek yang dipilih</h4>
+          <form name="object">
+            <input type="radio" name="object" value="pyramid" onchange="changeObject(this.value)" >
+            <label>Limas segiempat</label>
+            <input type="radio" name="object" value="cube" onchange="changeObject(this.value)" checked>
+            <label>Kubus</label>
+            <input type="radio" name="object" value="objek3" onchange="changeObject(this.value)">
+            <label>Objek3</label>
+          </form>
+        </div>
+        <div class="menuitem">
+          <h4>Mode proyeksi</h4>
+          <form name="projections">
+            <input type="radio" name="projection" value="orto" autocomplete="off" onchange="changeProjection(this.value)" checked>
+            <label>Orthographic</label>
+            <input type="radio" name="projection" value="pers" autocomplete="off" onchange="changeProjection(this.value)">
+            <label>Perspective</label>
+            <input type="radio" name="projection" value="oblique" autocomplete="off" onchange="changeProjection(this.value)">
+            <label>Oblique</label>
+          </form>
+        </div>
+        <div class="menuitem">
           <h4>Orientation</h4>
           <div class="grid2">
             <label for="rotation"

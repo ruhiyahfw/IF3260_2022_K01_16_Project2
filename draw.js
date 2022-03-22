@@ -5,25 +5,34 @@ function drawScene(gl, programInfo, buffers) {
   gl.enable(gl.DEPTH_TEST); // depth test
   gl.depthFunc(gl.LEQUAL); // near things obscure far things
 
-  // clear canvas
-
-  gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-  // projection matrices
+  /**** PROJECTION MATRICES  *****/
 
   const fieldOfView = (45 * Math.PI) / 180; // in radians
   const aspect = gl.canvas.clientWidth / gl.canvas.clientHeight;
   const zNear = 0.1;
   const zFar = 100.0;
-  const projectionMatrix = create();
+  var projectionMatrix = create();
+  
+  if (mode == "orto"){
+    // orthographic
+    // TODO: check projection mode
+    ortho(projectionMatrix, -aspect, aspect, -1.0, 1.0, zNear, zFar);
+  }
+  else if (mode == "pers"){
+    projectionMatrix = perspectively(fieldOfView, aspect, zNear, zFar);
+  }
 
-  // orthographic
-  // TODO: check projection mode
-
-  ortho(projectionMatrix, -aspect, aspect, -1.0, 1.0, zNear, zFar);
-
+  /*** OBJECT TRANSFORMATION ***/
   // set the drawing point to the center
   const modelViewMatrix = create();
+
+
+  // if (buffers.type == object){
+  //   // scaling chosen object
+  //   modelViewMatrix = scale(modelViewMatrix, scales[0], scales[1], scales[2]);
+  // }
+
+  
 
   // move drawing position a bit
 

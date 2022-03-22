@@ -50,11 +50,16 @@ function main() {
   };
 
   // buffers
-  const buffers = initBuffersPyramid(gl);
+  const buffers1 = initBuffersPyramid(gl);
+  const buffers2 = initBuffersCube(gl);
 
   // draw the scene
   function render(now) {
-    drawScene(gl, programInfo, buffers);
+    // clear canvas
+    gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
+
+    drawScene(gl, programInfo, buffers1);
+    drawScene(gl, programInfo, buffers2);
 
     requestAnimationFrame(render);
   }

@@ -22,3 +22,11 @@ rotationZRange.addEventListener("change", () => {
 cameraRange.addEventListener("change", () => {
     camera.innerHTML = cameraRange.value;
 });
+
+function changeProjection(val){
+    mode = val;
+}
+
+function changeObject(val){
+    object = val;
+}

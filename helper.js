@@ -1,3 +1,6 @@
+var mode = "orto";
+var object = "cube"
+
 /*** ORTHOGRAPHIC PROJECTION ***/
 const ortho = function (out, left, right, bottom, top, near, far) {
     var lr = 1 / (left - right),
@@ -9,6 +12,21 @@ const ortho = function (out, left, right, bottom, top, near, far) {
     out[12] = (left + right) * lr;
     out[13] = (top + bottom) * bt;
     out[14] = (far + near) * nf;
+    return out;
+};
+
+/*** PERSPECTIVE PROJECTION  ***/
+const perspectively = function(fovyrad, aspect, near, far) {
+    var f = Math.tan(Math.PI * 0.5 - 0.5 * fovyrad);
+    var rangeInv = 1.0 / (near - far);
+
+    out = [
+        2*(f / aspect), 0, 0, 0,
+        0, 2*f, 0, 0,
+        0, 0, (near + far) * rangeInv, -1,
+        0, 0, near * far * rangeInv * 2, 0
+      ];
+
     return out;
 };
 

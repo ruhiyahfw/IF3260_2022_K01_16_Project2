@@ -215,5 +215,6 @@ function initBuffersCube(gl) {
     position: positionBuffer,
     color: colorBuffer,
     indices: indexBuffer,
+    type:"cube"
   };
 }
