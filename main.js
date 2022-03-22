@@ -52,6 +52,7 @@ function main() {
   // buffers
   const buffers1 = initBuffersPyramid(gl);
   const buffers2 = initBuffersCube(gl);
+  const buffers3 = initBuffersTriangularPrism(gl);
 
   // draw the scene
   function render() {
@@ -60,6 +61,7 @@ function main() {
 
     drawScene(gl, programInfo, buffers1);
     drawScene(gl, programInfo, buffers2);
+    drawScene(gl, programInfo, buffers3);
 
     requestAnimationFrame(render);
   }
