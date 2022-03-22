@@ -33,18 +33,18 @@ function drawScene(gl, programInfo, buffers) {
   var modelViewMatrix = create();
 
 
-  translate(
+  translateCamera(
     modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to translate
     [-0.0, 0.0, -6.0]
   ); // amount to translate
-  rotate(
+  rotateCamera(
     modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
     0, // amount to rotate in radians
     [0, 0, 1]
   ); // axis to rotate around (Z)
-  rotate(
+  rotateCamera(
     modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
     0, // amount to rotate in radians
@@ -59,23 +59,40 @@ function drawScene(gl, programInfo, buffers) {
   // translasi
 
 
-  // rotasi
-  // for rotate z
-  // rotate(
+  // rotation
+  if (buffers.type == object){
+    if (mode == "orto"){
+      modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
+      modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
+      modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
+    }
+    if (mode == "persp")
+      modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
+      modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
+      modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
+  }
+
+  // ZOOM
+  scaleCamera(modelViewMatrix,     // destination matrix
+  modelViewMatrix,     // matrix to scale
+  [camera.innerHTML, camera.innerHTML, camera.innerHTML]);  // amount to zoom */
+    
+  // // for rotate z
+  // rotateCamera(
   //   modelViewMatrix, // destination matrix
   //   modelViewMatrix, // matrix to rotate
   //   rotationZ.innerHTML, // amount to rotate in radians
   //   [0, 0, 1]
   // ); // axis to rotate around (Z)
   // //for rotate x
-  // rotate(
+  // rotateCamera(
   //   modelViewMatrix, // destination matrix
   //   modelViewMatrix, // matrix to rotate
   //   rotationX.innerHTML * 0.7, // amount to rotate in radians
   //   [0, 1, 0]
   // ); // axis to rotate around (X)*/
   // //for rotate y (?)
-  // rotate(
+  // rotateCamera(
   //   modelViewMatrix, // destination matrix
   //   modelViewMatrix, // matrix to rotate
   //   rotationY.innerHTML, // amount to rotate in radians

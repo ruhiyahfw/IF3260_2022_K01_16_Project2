@@ -135,8 +135,8 @@ const create = function() {
     return out;
 };
 
-/*** ROTATE MATRIX ***/
-const rotate = function (out, a, rad, axis) {
+/*** ROTATE CAMERA ***/
+const rotateCamera = function (out, a, rad, axis) {
     var x = axis[0], y = axis[1], z = axis[2],
         len = Math.sqrt(x * x + y * y + z * z),
         s, c, t,
@@ -191,7 +191,7 @@ const rotate = function (out, a, rad, axis) {
 };
 
 // TODO: other operation
-const translate = function(out, a, v) {
+const translateCamera = function(out, a, v) {
     let x = v[0],
       y = v[1],
       z = v[2];
@@ -269,4 +269,109 @@ var scale = function(m, sx, sy, sz, center){
     out = multiply(out, translationMatrix(-center[0], -center[1], -center[2]));
 
     return out;
+}
+
+// ROTATION MATRIX
+function xRotation(angleInRadians) {
+  var c = Math.cos(angleInRadians);
+  var s = Math.sin(angleInRadians);
+
+  return [
+    1, 0, 0, 0,
+    0, c, s, 0,
+    0, -s, c, 0,
+    0, 0, 0, 1,
+  ];
+}
+
+function yRotation(angleInRadians) {
+  var c = Math.cos(angleInRadians);
+  var s = Math.sin(angleInRadians);
+
+  return [
+    c, 0, s, 0,
+    0, 1, 0, 0,
+    -s, 0, c, 0,
+    0, 0, 0, 1,
+  ];
+}
+
+function zRotation(angleInRadians) {
+  var c = Math.cos(angleInRadians);
+  var s = Math.sin(angleInRadians);
+
+  return [
+     c, s, 0, 0,
+    -s, c, 0, 0,
+     0, 0, 1, 0,
+     0, 0, 0, 1,
+  ];
+}
+
+var xRotate = function(m, rx){
+  return multiply(m, xRotation(rx));
+}
+
+var yRotate = function(m, rx){
+  return multiply(m, yRotation(rx));
+}
+
+var zRotate = function(m, rx){
+  return multiply(m, zRotation(rx));
+}
+
+/* CAMERA */
+
+function scaleCamera(out, a, v) {
+  let x = v[0],
+    y = v[1],
+    z = v[2];
+
+  out[0] = a[0] * x;
+  out[1] = a[1] * x;
+  out[2] = a[2] * x;
+  out[3] = a[3] * x;
+  out[4] = a[4] * y;
+  out[5] = a[5] * y;
+  out[6] = a[6] * y;
+  out[7] = a[7] * y;
+  out[8] = a[8] * z;
+  out[9] = a[9] * z;
+  out[10] = a[10] * z;
+  out[11] = a[11] * z;
+  out[12] = a[12];
+  out[13] = a[13];
+  out[14] = a[14];
+  out[15] = a[15];
+  return out;
+}
+
+function getCenterPoint(start, end, arr){
+  let maxX = -1;
+  let minX = 1;
+  let maxY = -1;
+  let minY = 1;
+
+  for (var i = start; i < end; i+=3){
+      if(maxX < arr[i]){
+          maxX = arr[i];
+      }
+
+      if(minX > arr[i]){
+          minX = arr[i];
+      }
+
+      if(maxY < arr[i+1]){
+          maxY = arr[i+1];
+      }
+
+      if(minY > arr[i+1]){
+          minY = arr[i+1];
+      }
+  }
+
+  let centerX = (maxX + minX)/2;
+  let centerY = (maxY + minY)/2;
+  console.log(centerX, centerY)
+  return ([centerX, centerY])
 }
