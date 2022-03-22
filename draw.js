@@ -5,6 +5,8 @@ function drawScene(gl, programInfo, buffers) {
   gl.enable(gl.DEPTH_TEST); // depth test
   gl.depthFunc(gl.LEQUAL); // near things obscure far things
 
+  //alert("draw scene \nmode = "+mode+" type = "+buffers.type);
+
   /**** PROJECTION MATRICES  *****/
 
   const fieldOfView = (45 * Math.PI) / 180; // in radians
@@ -18,27 +20,18 @@ function drawScene(gl, programInfo, buffers) {
     // TODO: check projection mode
     ortho(projectionMatrix, -aspect, aspect, -1.0, 1.0, zNear, zFar);
   }
-  else if (mode == "pers"){
+  else if (mode == "persp"){
     projectionMatrix = perspectively(fieldOfView, aspect, zNear, zFar);
+    
   }
-
-  /*** OBJECT TRANSFORMATION ***/
-  // set the drawing point to the center
-  const modelViewMatrix = create();
-
-
-  // if (buffers.type == object){
-  //   // scaling chosen object
-  //   modelViewMatrix = scale(modelViewMatrix, scales[0], scales[1], scales[2]);
-  // }
 
   
 
-  // move drawing position a bit
 
-  // TODO: see all the modes
+  /*** SETTING UP THE CAMERA ***/
+  // set the drawing point to the center
+  var modelViewMatrix = create();
 
-  // setup camera
 
   translate(
     modelViewMatrix, // destination matrix
@@ -58,32 +51,55 @@ function drawScene(gl, programInfo, buffers) {
     [0, 1, 0]
   ); // axis to rotate around (X)
 
+  console.log(orto["scales"]["cube"]+"\n"+orto["scales"]["pyramid"]);
+
+
+  /*** OBJECT TRANSFORMATION ***/
+  if (buffers.type == object){
+    if (mode == "orto"){
+      modelViewMatrix = scale(modelViewMatrix, orto["scales"][object][0], orto["scales"][object][1], orto["scales"][object][2]);
+    }
+    if (mode == "persp")
+      modelViewMatrix = scale(modelViewMatrix, persp["scales"][object][0], persp["scales"][object][1], persp["scales"][object][2]);
+  }
+  
+
+  
+
+  // move drawing position a bit
+
+  // TODO: see all the modes
+
+  // setup camera
+
+  
+
   // for scale - buat zoom kamera manfaatin fungsi scale
   /*scale(modelViewMatrix,     // destination matrix
   modelViewMatrix,     // matrix to scale
   [camera.innerHTML, camera.innerHTML, camera.innerHTML]);  // amount to translate */
-
-  // for rotate z
-  rotate(
-    modelViewMatrix, // destination matrix
-    modelViewMatrix, // matrix to rotate
-    rotationZ.innerHTML, // amount to rotate in radians
-    [0, 0, 1]
-  ); // axis to rotate around (Z)
-  //for rotate x
-  rotate(
-    modelViewMatrix, // destination matrix
-    modelViewMatrix, // matrix to rotate
-    rotationX.innerHTML * 0.7, // amount to rotate in radians
-    [0, 1, 0]
-  ); // axis to rotate around (X)*/
-  //for rotate y (?)
-  rotate(
-    modelViewMatrix, // destination matrix
-    modelViewMatrix, // matrix to rotate
-    rotationY.innerHTML, // amount to rotate in radians
-    [1, 0, 0]
-  ); // axis to rotate around (Y)*/
+    
+  // // for rotate z
+  // rotate(
+  //   modelViewMatrix, // destination matrix
+  //   modelViewMatrix, // matrix to rotate
+  //   rotationZ.innerHTML, // amount to rotate in radians
+  //   [0, 0, 1]
+  // ); // axis to rotate around (Z)
+  // //for rotate x
+  // rotate(
+  //   modelViewMatrix, // destination matrix
+  //   modelViewMatrix, // matrix to rotate
+  //   rotationX.innerHTML * 0.7, // amount to rotate in radians
+  //   [0, 1, 0]
+  // ); // axis to rotate around (X)*/
+  // //for rotate y (?)
+  // rotate(
+  //   modelViewMatrix, // destination matrix
+  //   modelViewMatrix, // matrix to rotate
+  //   rotationY.innerHTML, // amount to rotate in radians
+  //   [1, 0, 0]
+  // ); // axis to rotate around (Y)*/
 
   // pull out the positions from the position buffer into the vertexPosition attribute
   {

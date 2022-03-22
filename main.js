@@ -54,7 +54,7 @@ function main() {
   const buffers2 = initBuffersCube(gl);
 
   // draw the scene
-  function render(now) {
+  function render() {
     // clear canvas
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
