@@ -51,35 +51,16 @@ function drawScene(gl, programInfo, buffers) {
     [0, 1, 0]
   ); // axis to rotate around (X)
 
-  console.log(orto["scales"]["cube"]+"\n"+orto["scales"]["pyramid"]);
-
 
   /*** OBJECT TRANSFORMATION ***/
-  if (buffers.type == object){
-    if (mode == "orto"){
-      modelViewMatrix = scale(modelViewMatrix, orto["scales"][object][0], orto["scales"][object][1], orto["scales"][object][2]);
-    }
-    if (mode == "persp")
-      modelViewMatrix = scale(modelViewMatrix, persp["scales"][object][0], persp["scales"][object][1], persp["scales"][object][2]);
-  }
-  
+  // Scaling
+  modelViewMatrix = scale(modelViewMatrix, arrTransformation[mode]["scales"][buffers.type][0], arrTransformation[mode]["scales"][buffers.type][1], arrTransformation[mode]["scales"][buffers.type][2], buffers.center);
 
-  
+  // translasi
 
-  // move drawing position a bit
 
-  // TODO: see all the modes
-
-  // setup camera
-
-  
-
-  // for scale - buat zoom kamera manfaatin fungsi scale
-  /*scale(modelViewMatrix,     // destination matrix
-  modelViewMatrix,     // matrix to scale
-  [camera.innerHTML, camera.innerHTML, camera.innerHTML]);  // amount to translate */
-    
-  // // for rotate z
+  // rotasi
+  // for rotate z
   // rotate(
   //   modelViewMatrix, // destination matrix
   //   modelViewMatrix, // matrix to rotate

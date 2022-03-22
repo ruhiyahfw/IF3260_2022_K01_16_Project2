@@ -1,29 +1,31 @@
 var mode = "orto";
 var object = "cube"
-var orto = {
-      "scales": {
-        "cube": [1.0, 1.0, 1.0],
-        "pyramid": [1.0, 1.0, 1.0],
-        "obj3": [1.0, 1.0, 1.0],
-      }
+var arrTransformation = {
+  "orto" : {
+    "scales": {
+      "cube": [1.0, 1.0, 1.0],
+      "pyramid": [1.0, 1.0, 1.0],
+      "obj3": [1.0, 1.0, 1.0],
     }
-var persp = {
+  },
+  "persp" : {
     "translations": {
-        "cube": [-3.0, 0.0, 0.0],
-        "pyramid": [0.0, 0.0, 0.0],
-        "obj3": [3.0, 0.0, 0.0],
-      },
-      "rotations": {
-        "cube": [0, 0, 0],
-        "pyramid": [0, 0, 0],
-        "obj3": [0, 0, 0],
-      },
-      "scales": {
-        "cube": [1.0, 1.0, 1.0],
-        "pyramid": [1.0, 1.0, 1.0],
-        "obj3": [1.0, 1.0, 1.0],
-      }
+      "cube": [-3.0, 0.0, 0.0],
+      "pyramid": [0.0, 0.0, 0.0],
+      "obj3": [3.0, 0.0, 0.0],
+    },
+    "rotations": {
+      "cube": [0, 0, 0],
+      "pyramid": [0, 0, 0],
+      "obj3": [0, 0, 0],
+    },
+    "scales": {
+      "cube": [1.0, 1.0, 1.0],
+      "pyramid": [1.0, 1.0, 1.0],
+      "obj3": [1.0, 1.0, 1.0],
     }
+  }
+}
 
 /*** ORTHOGRAPHIC PROJECTION ***/
 const ortho = function (out, left, right, bottom, top, near, far) {
@@ -55,6 +57,18 @@ const perspectively = function(fovyrad, aspect, near, far) {
 };
 
 // matrix multiplier
+// var kali4 = function(a,b){
+//   var out = create();
+//   for (var i=0; i<4; i++){
+//     for (var j=0; j<4; j++){
+//       for (var k=0; k<4; k++){
+//         out[4*i+j] += a[i*4+k] * b[k*4+j];
+//       }
+//     }
+//   }
+//   return out;
+// }
+
 var multiply = function(a, b) {
     var a00 = a[0 * 4 + 0];
     var a01 = a[0 * 4 + 1];
@@ -226,6 +240,16 @@ const translate = function(out, a, v) {
     return out;
   }
 
+/*** TRANSLATION MATRIX ***/
+var translationMatrix = function(dx, dy, dz){
+  return [
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    dx, dy, dz, 1,
+  ]
+}
+
 /*** SCALING MATRIX ***/
 var scalingMatrix = function (sx, sy, sz) {
     return [
@@ -236,6 +260,13 @@ var scalingMatrix = function (sx, sy, sz) {
     ];
 }
 
-var scale = function(m, sx, sy, sz){
-    return multiply(m, scalingMatrix(sx, sy, sz));
+var scale = function(m, sx, sy, sz, center){
+  var out = m;
+    // make sure the shape is now in center before scaling  --> scale --> return the shape to its original object
+    // multiply the transformation matrix backward
+    out = multiply(m, translationMatrix(center[0], center[1], center[2]));
+    out = multiply(out, scalingMatrix(sx, sy, sz));
+    out = multiply(out, translationMatrix(-center[0], -center[1], -center[2]));
+
+    return out;
 }

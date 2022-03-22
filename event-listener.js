@@ -34,39 +34,34 @@ cameraRange.addEventListener("change", () => {
 
 function changeProjection(val){
     mode = val;
+    scaleX.innerHTML = arrTransformation[mode]["scales"][object][0];
+    scaleY.innerHTML = arrTransformation[mode]["scales"][object][1];
+    scaleZ.innerHTML = arrTransformation[mode]["scales"][object][2];
+    scaleXRange.value = arrTransformation[mode]["scales"][object][0];
+    scaleYRange.value = arrTransformation[mode]["scales"][object][1];
+    scaleZRange.value = arrTransformation[mode]["scales"][object][2];
 }
 
 function changeObject(val){
     object = val;
-    alert(persp["scales"]["cube"][0])
+    scaleX.innerHTML = arrTransformation[mode]["scales"][object][0];
+    scaleY.innerHTML = arrTransformation[mode]["scales"][object][1];
+    scaleZ.innerHTML = arrTransformation[mode]["scales"][object][2];
+    scaleXRange.value = arrTransformation[mode]["scales"][object][0];
+    scaleYRange.value = arrTransformation[mode]["scales"][object][1];
+    scaleZRange.value = arrTransformation[mode]["scales"][object][2];
 }
 
 scaleXRange.addEventListener("input", () => {
     scaleX.innerHTML = scaleXRange.value;
-    if (mode == "orto"){
-        orto["scales"][object][0] = scaleXRange.value;
-    }
-    if (mode == "persp"){
-        persp["scales"][object][0] = scaleXRange.value;
-    }
+    arrTransformation[mode]["scales"][object][0] = scaleXRange.value;
 });
 
 scaleYRange.addEventListener("input", () => {
     scaleY.innerHTML = scaleYRange.value;
-    if (mode == "orto"){
-        orto["scales"][object][1] = scaleYRange.value;
-    }
-    if (mode == "persp"){
-        persp["scales"][object][1] = scaleYRange.value;
-    }
+    arrTransformation[mode]["scales"][object][1] = scaleYRange.value;
 });
 
 scaleZRange.addEventListener("input", () => {
-    scaleZ.innerHTML = scaleZRange.value;
-    if (mode == "orto"){
-        orto["scales"][object][2] = scaleZRange.value;
-    }
-    if (mode == "persp"){
-        persp["scales"][object][2] = scaleZRange.value;
-    }
+    arrTransformation[mode]["scales"][object][2] = scaleZRange.value;
 });

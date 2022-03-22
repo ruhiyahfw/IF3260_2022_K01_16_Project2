@@ -127,6 +127,7 @@ function initBuffersPyramid(gl) {
     position: positionBuffer,
     color: colorBuffer,
     indices: indexBuffer,
-    type: "pyramid"
+    type: "pyramid",
+    center: [-0.8,0,0]
   };
 }
