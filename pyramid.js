@@ -125,8 +125,11 @@ function initBuffersPyramid(gl) {
 
   return {
     position: positionBuffer,
+    // vertices: positions,
     color: colorBuffer,
     indices: indexBuffer,
-    type: "pyramid"
+    type: "pyramid",
+    // offset: 24,
+    // numVertices: 64,
   };
 }

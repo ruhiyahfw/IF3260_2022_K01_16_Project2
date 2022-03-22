@@ -33,18 +33,18 @@ function drawScene(gl, programInfo, buffers) {
   var modelViewMatrix = create();
 
 
-  translate(
+  translateCamera(
     modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to translate
     [-0.0, 0.0, -6.0]
   ); // amount to translate
-  rotate(
+  rotateCamera(
     modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
     0, // amount to rotate in radians
     [0, 0, 1]
   ); // axis to rotate around (Z)
-  rotate(
+  rotateCamera(
     modelViewMatrix, // destination matrix
     modelViewMatrix, // matrix to rotate
     0, // amount to rotate in radians
@@ -58,43 +58,38 @@ function drawScene(gl, programInfo, buffers) {
   if (buffers.type == object){
     if (mode == "orto"){
       modelViewMatrix = scale(modelViewMatrix, orto["scales"][object][0], orto["scales"][object][1], orto["scales"][object][2]);
+      modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
+      modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
+      modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
     }
     if (mode == "persp")
       modelViewMatrix = scale(modelViewMatrix, persp["scales"][object][0], persp["scales"][object][1], persp["scales"][object][2]);
+      modelViewMatrix = xRotate(modelViewMatrix, rotationX.innerHTML);
+      modelViewMatrix = yRotate(modelViewMatrix, rotationY.innerHTML);
+      modelViewMatrix = zRotate(modelViewMatrix, rotationZ.innerHTML);
   }
-  
 
-  
-
-  // move drawing position a bit
-
-  // TODO: see all the modes
-
-  // setup camera
-
-  
-
-  // for scale - buat zoom kamera manfaatin fungsi scale
-  /*scale(modelViewMatrix,     // destination matrix
+  // ZOOM
+  scaleCamera(modelViewMatrix,     // destination matrix
   modelViewMatrix,     // matrix to scale
-  [camera.innerHTML, camera.innerHTML, camera.innerHTML]);  // amount to translate */
+  [camera.innerHTML, camera.innerHTML, camera.innerHTML]);  // amount to zoom */
     
   // // for rotate z
-  // rotate(
+  // rotateCamera(
   //   modelViewMatrix, // destination matrix
   //   modelViewMatrix, // matrix to rotate
   //   rotationZ.innerHTML, // amount to rotate in radians
   //   [0, 0, 1]
   // ); // axis to rotate around (Z)
   // //for rotate x
-  // rotate(
+  // rotateCamera(
   //   modelViewMatrix, // destination matrix
   //   modelViewMatrix, // matrix to rotate
   //   rotationX.innerHTML * 0.7, // amount to rotate in radians
   //   [0, 1, 0]
   // ); // axis to rotate around (X)*/
   // //for rotate y (?)
-  // rotate(
+  // rotateCamera(
   //   modelViewMatrix, // destination matrix
   //   modelViewMatrix, // matrix to rotate
   //   rotationY.innerHTML, // amount to rotate in radians

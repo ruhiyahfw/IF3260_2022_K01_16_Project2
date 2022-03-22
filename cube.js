@@ -213,8 +213,11 @@ function initBuffersCube(gl) {
 
   return {
     position: positionBuffer,
+    // vertices: positions,
+    // offset: 0,
     color: colorBuffer,
     indices: indexBuffer,
-    type:"cube"
+    type:"cube",
+    // numVertices: 96,
   };
 }
