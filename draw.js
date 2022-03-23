@@ -53,6 +53,7 @@ function drawScene(gl, programInfo, buffers) {
   modelViewMatrix = scale(modelViewMatrix, arrTransformation[mode]["scales"][buffers.type][0], arrTransformation[mode]["scales"][buffers.type][1], arrTransformation[mode]["scales"][buffers.type][2], buffers.center);
   
   // translasi
+  modelViewMatrix = translate(modelViewMatrix, arrTransformation[mode]["translations"][buffers.type], buffers.type);
 
   // rotation
   modelViewMatrix = rotateX(modelViewMatrix, arrTransformation[mode]["rotations"][buffers.type][0], buffers.center);

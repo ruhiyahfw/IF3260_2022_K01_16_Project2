@@ -28,7 +28,7 @@ function main() {
       vColor = aVertexColor;
 
       // Apply lighting effect
-      highp vec3 ambientLight = vec3(0.8, 0.8, 0.8);
+      highp vec3 ambientLight = vec3(0.5, 0.5, 0.5);
       highp vec3 directionalLightColor = vec3(1, 1, 1);
       highp vec3 directionalVector = normalize(vec3(0.85, 0.8, 0.75));
 
@@ -75,18 +75,19 @@ function main() {
   };
 
   // buffers
-  const buffers1 = initBuffersPyramid(gl);
-  const buffers2 = initBuffersCube(gl);
-  const buffers3 = initBuffersTriangularPrism(gl);
+  buffers["pyramid"] = initBuffersPyramid(gl);
+  buffers["cube"] = initBuffersCube(gl);
+  buffers["triangularprism"] = initBuffersTriangularPrism(gl);
+  console.log(buffers);
 
   // draw the scene
   function render() {
     // clear canvas
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
-    drawScene(gl, programInfo, buffers1);
-    drawScene(gl, programInfo, buffers2);
-    drawScene(gl, programInfo, buffers3);
+    drawScene(gl, programInfo, buffers["pyramid"]);
+    drawScene(gl, programInfo, buffers["cube"]);
+    drawScene(gl, programInfo, buffers["triangularprism"]);
 
     requestAnimationFrame(render);
   }

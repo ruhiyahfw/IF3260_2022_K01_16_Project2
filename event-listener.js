@@ -15,7 +15,71 @@ var scaleYRange = document.getElementById("scalingY");
 var scaleY = document.getElementById("scalingY-value");
 var scaleZRange = document.getElementById("scalingZ");
 var scaleZ = document.getElementById("scalingZ-value");
+// translation
+var translateXRange = document.getElementById("translateX");
+var translateX = document.getElementById("translateX-value");
+var translateYRange = document.getElementById("translateY");
+var translateY = document.getElementById("translateY-value");
+var translateZRange = document.getElementById("translateZ");
+var translateZ = document.getElementById("translateZ-value");
 
+// change projection
+function changeProjection(val){
+    mode = val;
+    scaleX.innerHTML = arrTransformation[mode]["scales"][object][0];
+    scaleY.innerHTML = arrTransformation[mode]["scales"][object][1];
+    scaleZ.innerHTML = arrTransformation[mode]["scales"][object][2];
+    scaleXRange.value = arrTransformation[mode]["scales"][object][0];
+    scaleYRange.value = arrTransformation[mode]["scales"][object][1];
+    scaleZRange.value = arrTransformation[mode]["scales"][object][2];
+    rotationX.innerHTML = arrTransformation[mode]["rotations"][object][0];
+    rotationY.innerHTML = arrTransformation[mode]["rotations"][object][1];
+    rotationZ.innerHTML = arrTransformation[mode]["rotations"][object][2];
+    rotationXRange.value = arrTransformation[mode]["rotations"][object][0];
+    rotationYRange.value = arrTransformation[mode]["rotations"][object][1];
+    rotationZRange.value = arrTransformation[mode]["rotations"][object][2];
+    translateX.innerHTML = arrTransformation[mode]["translations"][object][0];
+    translateY.innerHTML = arrTransformation[mode]["translations"][object][1];
+    translateZ.innerHTML = arrTransformation[mode]["translations"][object][2];
+    translateXRange.value = arrTransformation[mode]["translations"][object][0];
+    translateYRange.value = arrTransformation[mode]["translations"][object][1];
+    translateZRange.value = arrTransformation[mode]["translations"][object][2];
+}
+
+// change object
+function changeObject(val){
+    object = val;
+    scaleX.innerHTML = arrTransformation[mode]["scales"][object][0];
+    scaleY.innerHTML = arrTransformation[mode]["scales"][object][1];
+    scaleZ.innerHTML = arrTransformation[mode]["scales"][object][2];
+    scaleXRange.value = arrTransformation[mode]["scales"][object][0];
+    scaleYRange.value = arrTransformation[mode]["scales"][object][1];
+    scaleZRange.value = arrTransformation[mode]["scales"][object][2];
+    rotationX.innerHTML = arrTransformation[mode]["rotations"][object][0];
+    rotationY.innerHTML = arrTransformation[mode]["rotations"][object][1];
+    rotationZ.innerHTML = arrTransformation[mode]["rotations"][object][2];
+    rotationXRange.value = arrTransformation[mode]["rotations"][object][0];
+    rotationYRange.value = arrTransformation[mode]["rotations"][object][1];
+    rotationZRange.value = arrTransformation[mode]["rotations"][object][2];
+    translateX.innerHTML = arrTransformation[mode]["translations"][object][0];
+    translateY.innerHTML = arrTransformation[mode]["translations"][object][1];
+    translateZ.innerHTML = arrTransformation[mode]["translations"][object][2];
+    translateXRange.value = arrTransformation[mode]["translations"][object][0];
+    translateYRange.value = arrTransformation[mode]["translations"][object][1];
+    translateZRange.value = arrTransformation[mode]["translations"][object][2];
+}
+
+// shading
+function turnShadingOnOff(val){
+    if (val == "on"){
+        shadingState = true;
+    }
+    else{
+        shadingState = false;
+    }
+}
+
+// rotation
 rotationXRange.addEventListener("input", () => {
     rotationX.innerHTML = rotationXRange.value;
     arrTransformation[mode]["rotations"][object][0] = rotationXRange.value;
@@ -31,52 +95,14 @@ rotationZRange.addEventListener("input", () => {
     arrTransformation[mode]["rotations"][object][2] = rotationZRange.value;
 });
 
+
+// camera
 cameraRange.addEventListener("input", () => {
     camera.innerHTML = cameraRange.value;
 });
 
-function changeProjection(val){
-    mode = val;
-    scaleX.innerHTML = arrTransformation[mode]["scales"][object][0];
-    scaleY.innerHTML = arrTransformation[mode]["scales"][object][1];
-    scaleZ.innerHTML = arrTransformation[mode]["scales"][object][2];
-    scaleXRange.value = arrTransformation[mode]["scales"][object][0];
-    scaleYRange.value = arrTransformation[mode]["scales"][object][1];
-    scaleZRange.value = arrTransformation[mode]["scales"][object][2];
-    rotationX.innerHTML = arrTransformation[mode]["rotations"][object][0];
-    rotationY.innerHTML = arrTransformation[mode]["rotations"][object][1];
-    rotationZ.innerHTML = arrTransformation[mode]["rotations"][object][2];
-    rotationXRange.value = arrTransformation[mode]["rotations"][object][0];
-    rotationYRange.value = arrTransformation[mode]["rotations"][object][1];
-    rotationZRange.value = arrTransformation[mode]["rotations"][object][2];
 
-}
-
-function changeObject(val){
-    object = val;
-    scaleX.innerHTML = arrTransformation[mode]["scales"][object][0];
-    scaleY.innerHTML = arrTransformation[mode]["scales"][object][1];
-    scaleZ.innerHTML = arrTransformation[mode]["scales"][object][2];
-    scaleXRange.value = arrTransformation[mode]["scales"][object][0];
-    scaleYRange.value = arrTransformation[mode]["scales"][object][1];
-    scaleZRange.value = arrTransformation[mode]["scales"][object][2];
-    rotationX.innerHTML = arrTransformation[mode]["rotations"][object][0];
-    rotationY.innerHTML = arrTransformation[mode]["rotations"][object][1];
-    rotationZ.innerHTML = arrTransformation[mode]["rotations"][object][2];
-    rotationXRange.value = arrTransformation[mode]["rotations"][object][0];
-    rotationYRange.value = arrTransformation[mode]["rotations"][object][1];
-    rotationZRange.value = arrTransformation[mode]["rotations"][object][2];
-}
-
-function turnShadingOnOff(val){
-    if (val == "on"){
-        shadingState = true;
-    }
-    else{
-        shadingState = false;
-    }
-}
-
+// scaling
 scaleXRange.addEventListener("input", () => {
     scaleX.innerHTML = scaleXRange.value;
     arrTransformation[mode]["scales"][object][0] = scaleXRange.value;
@@ -92,6 +118,23 @@ scaleZRange.addEventListener("input", () => {
     arrTransformation[mode]["scales"][object][2] = scaleZRange.value;
 });
 
+// translation
+translateXRange.addEventListener("input", () => {
+    translateX.innerHTML = translateXRange.value;
+    arrTransformation[mode]["translations"][object][0] = translateXRange.value;
+});
+
+translateYRange.addEventListener("input", () => {
+    translateY.innerHTML = translateYRange.value;
+    arrTransformation[mode]["translations"][object][1] = translateYRange.value;
+});
+
+translateZRange.addEventListener("input", () => {
+    translateZ.innerHTML = translateYRange.value;
+    arrTransformation[mode]["translations"][object][2] = translateZRange.value;
+});
+
+// reset
 function handleReset() {
     objects = ["cube", "pyramid", "triangularprism"]
     projections = ["orto", "persp", "oblique"]
@@ -113,10 +156,19 @@ function handleReset() {
     scaleX.innerHTML = 1;
     scaleY.innerHTML = 1;
     scaleZ.innerHTML = 1;
+    translateXRange.value = 1
+    translateYRange.value = 1
+    translateZRange.value = 1;
+    translateX.innerHTML = 1;
+    translateY.innerHTML = 1;
+    translateZ.innerHTML = 1;
     cameraRange.value= 1;
     camera.innerHTML = 1;
     for (var i=0;i<3;i++) {
         for(var j=0;j<2;j++) { // j < 2, not yet for oblique
+            arrTransformation[projections[j]]["translations"][objects[i]][0] = 0;
+            arrTransformation[projections[j]]["translations"][objects[i]][1] = 0;
+            arrTransformation[projections[j]]["translations"][objects[i]][2] = 0;
             arrTransformation[projections[j]]["rotations"][objects[i]][0] = 0;
             arrTransformation[projections[j]]["rotations"][objects[i]][1] = 0;
             arrTransformation[projections[j]]["rotations"][objects[i]][2] = 0;

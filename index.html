@@ -56,7 +56,33 @@
           </form>
         </div>
         <div class="menuitem">
-          <h4>Orientation</h4>
+          <h4>Translasi</h4>
+          <div class="grid2">
+            <label for="translateX">translasi X : <span id="translateX-value">0</span></label>
+            <input
+              type="range"
+              id="translateX"
+              name="translateX"
+              min="-5" max="5" value="0" step="0.1"
+            />
+            <label for="translateY">translasi Y: <span id="translateY-value">0</span></label>
+            <input
+              type="range"
+              id="translateY"
+              name="translateY"
+              min="-5" max="5" value="0" step="0.1"
+            />
+            <label for="translateZ">translasi Z: <span id="translateZ-value">0</span></label>
+            <input
+              type="range"
+              id="translateZ"
+              name="translateZ"
+              min="-5" max="5" value="0" step="0.1"
+            />
+          </div>
+        </div>
+        <div class="menuitem">
+          <h4>Orientasi</h4>
           <div class="grid2">
             <label for="rotationX">Angle X: <span id="rotationX-value">0</span></label>
             <input
@@ -90,7 +116,7 @@
           </div>
         </div>
         <div class="menuitem">
-          <h4>Scale</h4>
+          <h4>Scaling</h4>
           <div class="grid2">
             <label for="scalingX">X scale: <span id="scalingX-value">1</span></label>
             <input
