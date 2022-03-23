@@ -208,6 +208,8 @@ function saveFile() {
     // collect project's variables
     var objToExport = [];
     objToExport.push(arrTransformation);
+    objToExport.push(mode);
+    objToExport.push(shadingState);
   
     // stringify objToExport
     var data = JSON.stringify(objToExport);
@@ -259,4 +261,6 @@ function loadFile() {
     handleReset()
     // save new global variables
     arrTransformation = arrObjects[0];
+    mode = arrObjects[1];
+    shadingState = arrObjects[2];
   }
