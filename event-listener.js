@@ -55,6 +55,15 @@ function changeObject(val){
     scaleZRange.value = arrTransformation[mode]["scales"][object][2];
 }
 
+function turnShadingOnOff(val){
+    if (val == "on"){
+        shadingState = true;
+    }
+    else{
+        shadingState = false;
+    }
+}
+
 scaleXRange.addEventListener("input", () => {
     scaleX.innerHTML = scaleXRange.value;
     arrTransformation[mode]["scales"][object][0] = scaleXRange.value;

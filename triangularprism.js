@@ -150,11 +150,18 @@ function initBuffersTriangularPrism(gl) {
     gl.STATIC_DRAW
   );
 
+  // normal
+  var normalBuffer = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, normalBuffer);
+  var vertexNormals = getVectorNormals(positions);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertexNormals), gl.STATIC_DRAW);
+
   return {
     position: positionBuffer,
     // vertices: positions,
     color: colorBuffer,
     indices: indexBuffer,
+    normal:normalBuffer,
     type: "triangularprism",
     center: [0.8,0,0],
     numVertices : indices.length,

@@ -1,6 +1,6 @@
 /*** DRAW SCENE ***/
 function drawScene(gl, programInfo, buffers) {
-  gl.clearColor(0.95, 0.95, 0.95, 1.0); // clear to back fully opaque
+  gl.clearColor(0.0, 0.0, 0.0, 1.0); // clear to back fully opaque
   gl.clearDepth(1.0); // clear everything
   gl.enable(gl.DEPTH_TEST); // depth test
   gl.depthFunc(gl.LEQUAL); // near things obscure far things
@@ -65,6 +65,11 @@ function drawScene(gl, programInfo, buffers) {
   [camera.innerHTML, camera.innerHTML, camera.innerHTML]);  // amount to zoom */
 
 
+  /** SHADING PREP ***/
+  // Compute a normal matrix for shading and lighting
+  var normalMatrix = inverse(modelViewMatrix);
+  normalMatrix = transpose(normalMatrix);
+
   // pull out the positions from the position buffer into the vertexPosition attribute
   {
     const numComponents = 3;
@@ -103,6 +108,27 @@ function drawScene(gl, programInfo, buffers) {
     gl.enableVertexAttribArray(programInfo.attribLocations.vertexColor);
   }
 
+  // Tell WebGL how to pull out the normals from
+  // the normal buffer into the vertexNormal attribute.
+  {
+    const numComponents = 3;
+    const type = gl.FLOAT;
+    const normalize = false;
+    const stride = 0;
+    const offset = 0;
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffers.normal);
+    gl.vertexAttribPointer(
+      programInfo.attribLocations.vertexNormal,
+      numComponents,
+      type,
+      normalize,
+      stride,
+      offset);
+    gl.enableVertexAttribArray(
+      programInfo.attribLocations.vertexNormal);
+    }
+        
+
   // specify indices to use to index the vertices
   gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, buffers.indices);
 
@@ -122,6 +148,13 @@ function drawScene(gl, programInfo, buffers) {
     false,
     modelViewMatrix
   );
+  gl.uniformMatrix4fv(
+    programInfo.uniformLocations.normalMatrix,
+    false,
+    normalMatrix);
+  gl.uniform1i(
+    programInfo.uniformLocations.shadingBool,
+    shadingState);
 
   {
     const vertexCount = buffers.numVertices;

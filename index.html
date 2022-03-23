@@ -47,6 +47,15 @@
           </form>
         </div>
         <div class="menuitem">
+          <h4>Pewarnaan</h4>
+          <form name="object">
+            <input type="radio" name="shade" value="on" onchange="turnShadingOnOff(this.value)" >
+            <label>Dengan shading</label>
+            <input type="radio" name="shade" value="off" onchange="turnShadingOnOff(this.value)" checked>
+            <label>Tanpa shading</label>
+          </form>
+        </div>
+        <div class="menuitem">
           <h4>Orientation</h4>
           <div class="grid2">
             <label for="rotation">Angle X: <span id="rotationX-value">0</span></label>
