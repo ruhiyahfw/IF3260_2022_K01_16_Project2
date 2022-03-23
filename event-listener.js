@@ -144,6 +144,8 @@ function handleReset() {
         document.getElementById(projections[i]).checked = false;
         document.getElementById(objects[i]).checked = false;
     }
+    changeProjection("orto");
+    changeObject("cube");
     rotationXRange.value = 0;
     rotationYRange.value = 0;
     rotationZRange.value = 0;
@@ -165,7 +167,7 @@ function handleReset() {
     cameraRange.value= 1;
     camera.innerHTML = 1;
     for (var i=0;i<3;i++) {
-        for(var j=0;j<2;j++) { // j < 2, not yet for oblique
+        for(var j=0;j<3;j++) {
             arrTransformation[projections[j]]["translations"][objects[i]][0] = 0;
             arrTransformation[projections[j]]["translations"][objects[i]][1] = 0;
             arrTransformation[projections[j]]["translations"][objects[i]][2] = 0;
