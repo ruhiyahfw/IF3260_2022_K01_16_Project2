@@ -54,7 +54,7 @@ function drawScene(gl, programInfo, buffers) {
 
   /*** OBJECT TRANSFORMATION ***/
   // Scaling
-  modelViewMatrix = scale(modelViewMatrix, arrTransformation[mode]["scales"][buffers.type][0], arrTransformation[mode]["scales"][buffers.type][1], arrTransformation[mode]["scales"][buffers.type][2], buffers.center);
+  modelViewMatrix = scale(modelViewMatrix, arrTransformation[mode]["scales"][buffers.type][0], arrTransformation[mode]["scales"][buffers.type][1], arrTransformation[mode]["scales"][buffers.type][2], buffers.center, buffers.type);
   
   // translasi
   modelViewMatrix = translate(modelViewMatrix, arrTransformation[mode]["translations"][buffers.type], buffers.type);

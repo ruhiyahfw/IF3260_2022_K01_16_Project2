@@ -297,13 +297,18 @@ var scalingMatrix = function (sx, sy, sz) {
     ];
 }
 
-var scale = function(m, sx, sy, sz, center){
+var scale = function(m, sx, sy, sz, center, type){
   var out = m;
     // make sure the shape is now in center before scaling  --> scale --> return the shape to its original object
     // multiply the transformation matrix backward
-    out = multiply(m, translationMatrix(center[0], center[1], center[2]));
+    var move0 = arrTransformation[mode]["translations"][type][0];
+    var move1 = arrTransformation[mode]["translations"][type][1];
+    var move2 = arrTransformation[mode]["translations"][type][2];
+    out = multiply(m, translationMatrix(move0, move1, move2));
+    out = multiply(out, translationMatrix(center[0], center[1], center[2]));
     out = multiply(out, scalingMatrix(sx, sy, sz));
     out = multiply(out, translationMatrix(-center[0], -center[1], -center[2]));
+    out = multiply(out, translationMatrix(-move0, -move1, -move2));
 
     return out;
 }
