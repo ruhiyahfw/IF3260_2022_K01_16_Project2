@@ -38,19 +38,6 @@ function drawScene(gl, programInfo, buffers) {
     modelViewMatrix, // matrix to translate
     [-0.0, 0.0, -6.0]
   ); // amount to translate
-  rotateCamera(
-    modelViewMatrix, // destination matrix
-    modelViewMatrix, // matrix to rotate
-    0, // amount to rotate in radians
-    [0, 0, 1]
-  ); // axis to rotate around (Z)
-  rotateCamera(
-    modelViewMatrix, // destination matrix
-    modelViewMatrix, // matrix to rotate
-    0, // amount to rotate in radians
-    [0, 1, 0]
-  ); // axis to rotate around (X)
-
 
   /*** OBJECT TRANSFORMATION ***/
   // Scaling
@@ -69,6 +56,13 @@ function drawScene(gl, programInfo, buffers) {
   modelViewMatrix,     // matrix to scale
   [camera.innerHTML, camera.innerHTML, camera.innerHTML]);  // amount to zoom */
 
+  //MOVE CAMERA
+  rotateCamera(
+    modelViewMatrix, // destination matrix
+    modelViewMatrix, // matrix to rotate
+    cameraMove.innerHTML, // amount to rotate in radians
+    [0, 1, 0]
+  ); // axis to rotate around
 
   /** SHADING PREP ***/
   // Compute a normal matrix for shading and lighting

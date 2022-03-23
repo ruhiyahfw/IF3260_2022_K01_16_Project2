@@ -22,6 +22,9 @@ var translateYRange = document.getElementById("translateY");
 var translateY = document.getElementById("translateY-value");
 var translateZRange = document.getElementById("translateZ");
 var translateZ = document.getElementById("translateZ-value");
+// camera
+var cameraMoveRange = document.getElementById("camera-move");
+var cameraMove = document.getElementById("camera-move-value");
 
 // change projection
 function changeProjection(val){
@@ -101,6 +104,9 @@ cameraRange.addEventListener("input", () => {
     camera.innerHTML = cameraRange.value;
 });
 
+cameraMoveRange.addEventListener("input", () => {
+    cameraMove.innerHTML = cameraMoveRange.value;
+});
 
 // scaling
 scaleXRange.addEventListener("input", () => {
@@ -138,6 +144,7 @@ translateZRange.addEventListener("input", () => {
 function handleReset() {
     objects = ["cube", "pyramid", "triangularprism"]
     projections = ["orto", "persp", "oblique"]
+    modes = ["translations", "rotations", "scales"]
     document.getElementById("orto").checked = true;
     cube.checked = true;
     for(var i=1;i<2;i++) {
@@ -166,17 +173,18 @@ function handleReset() {
     translateZ.innerHTML = 1;
     cameraRange.value= 1;
     camera.innerHTML = 1;
+    cameraMoveRange.value= 0;
+    cameraMove.innerHTML = 0;
     for (var i=0;i<3;i++) {
         for(var j=0;j<3;j++) {
-            arrTransformation[projections[j]]["translations"][objects[i]][0] = 0;
-            arrTransformation[projections[j]]["translations"][objects[i]][1] = 0;
-            arrTransformation[projections[j]]["translations"][objects[i]][2] = 0;
-            arrTransformation[projections[j]]["rotations"][objects[i]][0] = 0;
-            arrTransformation[projections[j]]["rotations"][objects[i]][1] = 0;
-            arrTransformation[projections[j]]["rotations"][objects[i]][2] = 0;
-            arrTransformation[projections[j]]["scales"][objects[i]][0] = 1;
-            arrTransformation[projections[j]]["scales"][objects[i]][1] = 1;
-            arrTransformation[projections[j]]["scales"][objects[i]][2] = 1;
+            for(var k=0;k<3;k++) {
+                for(var l=0;l<3;l++) {
+                    arrTransformation[projections[i]][modes[j]][objects[k]][l] = 0;
+                    if(j==2) {
+                        arrTransformation[projections[i]][modes[j]][objects[k]][l] = 1;
+                    }
+                }
+            }
         }
     }
 }
