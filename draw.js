@@ -24,6 +24,10 @@ function drawScene(gl, programInfo, buffers) {
     projectionMatrix = perspectively(fieldOfView, aspect, zNear, zFar);
     
   }
+  else if (mode == "oblique") {
+    ortho(projectionMatrix, -aspect, aspect, -1.0, 1.0, zNear, zFar);
+    projectionMatrix = oblique(projectionMatrix, 63.4);
+  }
 
   /*** SETTING UP THE CAMERA ***/
   // set the drawing point to the center

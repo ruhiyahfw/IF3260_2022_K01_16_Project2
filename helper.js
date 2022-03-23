@@ -36,6 +36,23 @@ var arrTransformation = {
       "pyramid": [1.0, 1.0, 1.0],
       "triangularprism": [1.0, 1.0, 1.0],
     }
+  },
+  "oblique" : {
+    "translations": {
+      "cube": [0.0, 0.0, 0.0],
+      "pyramid": [0.0, 0.0, 0.0],
+      "triangularprism": [0.0, 0.0, 0.0],
+    },
+    "rotations": {
+      "cube": [0, 0, 0],
+      "pyramid": [0, 0, 0],
+      "triangularprism": [0, 0, 0],
+    },
+    "scales": {
+      "cube": [1.0, 1.0, 1.0],
+      "pyramid": [1.0, 1.0, 1.0],
+      "triangularprism": [1.0, 1.0, 1.0],
+    }
   }
 }
 
@@ -67,6 +84,19 @@ const perspectively = function(fovyrad, aspect, near, far) {
 
     return out;
 };
+
+/*** OBLIQUE PROJECTION ***/
+const oblique = function(out, angle) {
+  const s = 0.5 * Math.sin(angle)
+  const c = 0.5 * Math.cos(angle)
+  const shearMat = [
+      1, 0, 0, s,
+      0, 1, 0, c,
+      0, 0, 1, 0,
+      0, 0, 0, 1,
+  ]
+  return multiply(out, shearMat)
+}
 
 var multiply = function(a, b) {
     var a00 = a[0 * 4 + 0];
