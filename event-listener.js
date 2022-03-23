@@ -5,7 +5,7 @@ var rotationYRange = document.getElementById("rotationY");
 var rotationY = document.getElementById("rotationY-value");
 var rotationZRange = document.getElementById("rotationZ");
 var rotationZ = document.getElementById("rotationZ-value");
-// camera
+// camera zoom
 var cameraRange = document.getElementById("camera");
 var camera = document.getElementById("camera-value");
 // scaling
@@ -22,7 +22,7 @@ var translateYRange = document.getElementById("translateY");
 var translateY = document.getElementById("translateY-value");
 var translateZRange = document.getElementById("translateZ");
 var translateZ = document.getElementById("translateZ-value");
-// camera
+// camera move
 var cameraMoveRange = document.getElementById("camera-move");
 var cameraMove = document.getElementById("camera-move-value");
 
@@ -153,28 +153,36 @@ function handleReset() {
     }
     changeProjection("orto");
     changeObject("cube");
+    // reset rotation
     rotationXRange.value = 0;
     rotationYRange.value = 0;
     rotationZRange.value = 0;
     rotationX.innerHTML = 0;
     rotationY.innerHTML = 0;
     rotationZ.innerHTML = 0;
+    // reset scale
     scaleXRange.value = 1
     scaleYRange.value = 1
     scaleZRange.value = 1;
     scaleX.innerHTML = 1;
     scaleY.innerHTML = 1;
     scaleZ.innerHTML = 1;
+    // reset translate
     translateXRange.value = 1
     translateYRange.value = 1
     translateZRange.value = 1;
     translateX.innerHTML = 1;
     translateY.innerHTML = 1;
     translateZ.innerHTML = 1;
+    // reset camera
     cameraRange.value= 1;
     camera.innerHTML = 1;
     cameraMoveRange.value= 0;
     cameraMove.innerHTML = 0;
+    // reset shading
+    shadingState = false;
+    document.getElementById("without-shading").checked = true;
+    document.getElementById("with-shading").checked = false;
     for (var i=0;i<3;i++) {
         for(var j=0;j<3;j++) {
             for(var k=0;k<3;k++) {
